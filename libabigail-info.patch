@@ -1,0 +1,13 @@
+--- libabigail-1.6/doc/manuals/conf.py.orig	2016-06-27 09:56:58.000000000 +0200
++++ libabigail-1.6/doc/manuals/conf.py	2019-06-09 17:32:44.142395166 +0200
+@@ -237,8 +237,8 @@
+    'Comparing Applications Binary Interfacces of binaries in ELF format',
+    'Dodji Seketeli',
+    'abigail',
+-   'compare the ABI of ELF binaries',
+-   'Individual utilities'),
++   '<SPACER>Compare the ABI of ELF binaries',
++   'Programming tools:'),
+ ]
+ 
+ # Documents to append as an appendix to all manuals.
