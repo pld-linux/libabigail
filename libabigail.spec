@@ -107,9 +107,7 @@ Statyczna biblioteka ABIGAIL.
 Summary:	API documentation for ABIGAIL library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki ABIGAIL 
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for ABIGAIL library.
