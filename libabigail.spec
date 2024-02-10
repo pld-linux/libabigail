@@ -6,12 +6,12 @@
 Summary:	Application Binary Interface Generic Analysis and Instrumentation Library
 Summary(pl.UTF-8):	Biblioteka do ogólnej analizy i porównywania ABI
 Name:		libabigail
-Version:	1.6
+Version:	2.4
 Release:	1
-License:	LGPL v3+
+License:	Apache v2.0 with LLVM Exception
 Group:		Libraries
-Source0:	ftp://sourceware.org/pub/libabigail/%{name}-%{version}.tar.gz
-# Source0-md5:	538bb4513a57e6d47365e8adb838c2e1
+Source0:	ftp://sourceware.org/pub/libabigail/%{name}-%{version}.tar.xz
+# Source0-md5:	0b981e79beb6dd5675244f0669207f81
 Patch0:		%{name}-info.patch
 URL:		http://www.sourceware.org/libabigail/
 BuildRequires:	autoconf >= 2.63
@@ -26,8 +26,10 @@ BuildRequires:	libxml2-devel >= 1:2.6.22
 BuildRequires:	pkgconfig
 BuildRequires:	python >= 1:2.6.6
 BuildRequires:	python3 >= 1:3.5
-BuildRequires:	sphinx-pdg
+%{?with_apidocs:BuildRequires:	sphinx-pdg}
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	texinfo
+BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -178,7 +180,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README
+%doc AUTHORS ChangeLog LICENSE.txt NEWS README
 %attr(755,root,root) %{_bindir}/abicompat
 %attr(755,root,root) %{_bindir}/abidiff
 %attr(755,root,root) %{_bindir}/abidw
@@ -186,7 +188,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/abipkgdiff
 %attr(755,root,root) %{_bindir}/kmidiff
 %attr(755,root,root) %{_libdir}/libabigail.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libabigail.so.0
+%attr(755,root,root) %ghost %{_libdir}/libabigail.so.3
 %dir %{_libdir}/libabigail
 %{_libdir}/libabigail/default.abignore
 %{_infodir}/abigail.info*
