@@ -6,12 +6,12 @@
 Summary:	Application Binary Interface Generic Analysis and Instrumentation Library
 Summary(pl.UTF-8):	Biblioteka do ogólnej analizy i porównywania ABI
 Name:		libabigail
-Version:	2.4
+Version:	2.5
 Release:	1
 License:	Apache v2.0 with LLVM Exception
 Group:		Libraries
 Source0:	ftp://sourceware.org/pub/libabigail/%{name}-%{version}.tar.xz
-# Source0-md5:	0b981e79beb6dd5675244f0669207f81
+# Source0-md5:	303285a19ffde9312e2d536046ea53ca
 Patch0:		%{name}-info.patch
 URL:		http://www.sourceware.org/libabigail/
 BuildRequires:	autoconf >= 2.63
@@ -26,6 +26,9 @@ BuildRequires:	libxml2-devel >= 1:2.6.22
 BuildRequires:	pkgconfig
 BuildRequires:	python >= 1:2.6.6
 BuildRequires:	python3 >= 1:3.5
+BuildRequires:	python3-git
+BuildRequires:	python3-libarchive-c
+BuildRequires:	sed >= 4.0
 %{?with_apidocs:BuildRequires:	sphinx-pdg}
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	texinfo
@@ -121,6 +124,8 @@ Dokumentacja API biblioteki ABIGAIL.
 %setup -q
 %patch0 -p1
 
+%{__sed} -i -e '1s,/usr/bin/env python3$,%{__python3},' tools/abidb
+
 %build
 # must rebuild, supplied libtool contains RH-specific hack (-specs=/usr/lib/rpm/redhat/redhat-hardened-ld)
 %{__libtoolize}
@@ -182,17 +187,19 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog LICENSE.txt NEWS README
 %attr(755,root,root) %{_bindir}/abicompat
+%attr(755,root,root) %{_bindir}/abidb
 %attr(755,root,root) %{_bindir}/abidiff
 %attr(755,root,root) %{_bindir}/abidw
 %attr(755,root,root) %{_bindir}/abilint
 %attr(755,root,root) %{_bindir}/abipkgdiff
 %attr(755,root,root) %{_bindir}/kmidiff
 %attr(755,root,root) %{_libdir}/libabigail.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libabigail.so.3
+%attr(755,root,root) %ghost %{_libdir}/libabigail.so.4
 %dir %{_libdir}/libabigail
 %{_libdir}/libabigail/default.abignore
 %{_infodir}/abigail.info*
 %{_mandir}/man1/abicompat.1*
+%{_mandir}/man1/abidb.1*
 %{_mandir}/man1/abidiff.1*
 %{_mandir}/man1/abidw.1*
 %{_mandir}/man1/abilint.1*
