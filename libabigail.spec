@@ -7,7 +7,7 @@ Summary:	Application Binary Interface Generic Analysis and Instrumentation Libra
 Summary(pl.UTF-8):	Biblioteka do ogólnej analizy i porównywania ABI
 Name:		libabigail
 Version:	2.5
-Release:	1
+Release:	2
 License:	Apache v2.0 with LLVM Exception
 Group:		Libraries
 Source0:	ftp://sourceware.org/pub/libabigail/%{name}-%{version}.tar.xz
