@@ -6,33 +6,41 @@
 Summary:	Application Binary Interface Generic Analysis and Instrumentation Library
 Summary(pl.UTF-8):	Biblioteka do ogólnej analizy i porównywania ABI
 Name:		libabigail
-Version:	2.5
-Release:	2
+Version:	2.8
+Release:	1
 License:	Apache v2.0 with LLVM Exception
 Group:		Libraries
 Source0:	ftp://sourceware.org/pub/libabigail/%{name}-%{version}.tar.xz
-# Source0-md5:	303285a19ffde9312e2d536046ea53ca
+# Source0-md5:	4d2b5b555fd4d097d00753d815b16c80
 Patch0:		%{name}-info.patch
 URL:		http://www.sourceware.org/libabigail/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11.1
+# libctf
+BuildRequires:	binutils-devel
+BuildRequires:	cpio
 %{?with_apidocs:BuildRequires:	doxygen}
-BuildRequires:	elfutils-devel
-BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	elfutils-devel >= 0.165
+BuildRequires:	libbpf-devel
+BuildRequires:	libstdc++-devel >= 6:5
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libxml2-devel >= 1:2.6.22
 # for zip-archive (disabled by default)
 #BuildRequires:	libzip-devel >= 0.10.1
 BuildRequires:	pkgconfig
 BuildRequires:	python >= 1:2.6.6
-BuildRequires:	python3 >= 1:3.5
+BuildRequires:	python3 >= 1:3.9
 BuildRequires:	python3-git
 BuildRequires:	python3-libarchive-c
+# zstd payload support
+BuildRequires:	rpm >= 1:4.16
+BuildRequires:	rpm-utils >= 1:4.16
 BuildRequires:	sed >= 4.0
 %{?with_apidocs:BuildRequires:	sphinx-pdg}
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	texinfo
-BuildRequires:	xz
+BuildRequires:	xxHash-devel >= 0.8.0
+BuildRequires:	xz-devel >= 1:5.2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -134,6 +142,7 @@ Dokumentacja API biblioteki ABIGAIL.
 %{__autoheader}
 %{__automake}
 %configure \
+	PYTHON=%{__python} \
 	%{?with_apidocs:--enable-apidoc} \
 	--enable-bash-completion \
 	--enable-cxx11 \
@@ -194,7 +203,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/abipkgdiff
 %attr(755,root,root) %{_bindir}/kmidiff
 %attr(755,root,root) %{_libdir}/libabigail.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libabigail.so.4
+%attr(755,root,root) %ghost %{_libdir}/libabigail.so.7
 %dir %{_libdir}/libabigail
 %{_libdir}/libabigail/default.abignore
 %{_infodir}/abigail.info*
@@ -232,5 +241,5 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
-%doc doc/api/html/*
+%doc doc/api/html/{search,*.css,*.html,*.js,*.png,*.svg}
 %endif
