@@ -6,14 +6,14 @@
 Summary:	Application Binary Interface Generic Analysis and Instrumentation Library
 Summary(pl.UTF-8):	Biblioteka do ogólnej analizy i porównywania ABI
 Name:		libabigail
-Version:	2.8
+Version:	2.9
 Release:	1
 License:	Apache v2.0 with LLVM Exception
 Group:		Libraries
-Source0:	ftp://sourceware.org/pub/libabigail/%{name}-%{version}.tar.xz
-# Source0-md5:	4d2b5b555fd4d097d00753d815b16c80
+Source0:	https://sourceware.org/pub/libabigail/%{name}-%{version}.tar.xz
+# Source0-md5:	9bd7f1fcf290b60461443e53c99859e1
 Patch0:		%{name}-info.patch
-URL:		http://www.sourceware.org/libabigail/
+URL:		https://www.sourceware.org/libabigail/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11.1
 # libctf
@@ -22,6 +22,7 @@ BuildRequires:	cpio
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	elfutils-devel >= 0.165
 BuildRequires:	libbpf-devel
+# C++14
 BuildRequires:	libstdc++-devel >= 6:5
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libxml2-devel >= 1:2.6.22
@@ -202,8 +203,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/abilint
 %attr(755,root,root) %{_bindir}/abipkgdiff
 %attr(755,root,root) %{_bindir}/kmidiff
-%attr(755,root,root) %{_libdir}/libabigail.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libabigail.so.7
+%{_libdir}/libabigail.so.*.*.*
+%ghost %{_libdir}/libabigail.so.8
 %dir %{_libdir}/libabigail
 %{_libdir}/libabigail/default.abignore
 %{_infodir}/abigail.info*
@@ -227,7 +228,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libabigail.so
+%{_libdir}/libabigail.so
 %{_includedir}/libabigail
 %{_pkgconfigdir}/libabigail.pc
 %{_aclocaldir}/abigail.m4
