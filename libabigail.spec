@@ -6,12 +6,12 @@
 Summary:	Application Binary Interface Generic Analysis and Instrumentation Library
 Summary(pl.UTF-8):	Biblioteka do ogólnej analizy i porównywania ABI
 Name:		libabigail
-Version:	2.9
-Release:	2
+Version:	2.10
+Release:	1
 License:	Apache v2.0 with LLVM Exception
 Group:		Libraries
 Source0:	https://sourceware.org/pub/libabigail/%{name}-%{version}.tar.xz
-# Source0-md5:	9bd7f1fcf290b60461443e53c99859e1
+# Source0-md5:	c5902dbbaa94de895342febb2c6834d8
 Patch0:		%{name}-info.patch
 URL:		https://www.sourceware.org/libabigail/
 BuildRequires:	autoconf >= 2.63
@@ -204,7 +204,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/abipkgdiff
 %attr(755,root,root) %{_bindir}/kmidiff
 %{_libdir}/libabigail.so.*.*.*
-%ghost %{_libdir}/libabigail.so.8
+%ghost %{_libdir}/libabigail.so.9
 %dir %{_libdir}/libabigail
 %{_libdir}/libabigail/default.abignore
 %{_infodir}/abigail.info*
